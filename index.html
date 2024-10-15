@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="style.js"></script>
+</head>
+
+<body>
+    <!-- 49- 57 -->
+    <!-- 1. Create a signup form and display form data in your web
+ page on submission. -->
+
+    <h1>Signup Form</h1>
+    <form id="signupForm" onsubmit="return displayFormData();">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+    <div id="displayData"></div>
+
+    <!-- 2. Suppose in your webpage there is content area in which
+you have entered your item details, but user can only see
+some details on first look. When user clicks on “Read
+more” button, full detail of that particular item will be
+displayed.  -->
+
+    <h1>Content Expand By More Button:</h1>
+    <p id="slowLoris">
+        Slow lorises are a group of several species of strepsirrhine primates which make
+        up the genus Nycticebus.
+        <a href="javascript:void(0);" onClick="expandLoris();"><em>Click for more.</em></a>
+    </p>
+
+    <!-- 3. In previous assignment you have created a tabular data
+using javascript. Let’s modify that. Create a form which
+takes student’s details and show each student detail in
+table. Each row of table must contain a delete button and
+an edit button. On click on delete button entire row should
+be deleted. On click on edit button, a hidden form will
+appear with the values of that row. -->
+
+    <h1>Student Details Form</h1>
+
+    <!-- Form for adding new student details -->
+    <form id="studentForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required><br><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" required><br><br>
+
+        <label for="grade">Grade:</label>
+        <input type="text" id="grade" required><br><br>
+
+        <button type="button" onclick="addStudent()">Add Student</button>
+    </form>
+
+    <h2>Student List</h2>
+
+    <!-- Table for displaying student records -->
+    <table border="1" id="studentTable">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Grade</th>
+            <th>Actions</th>
+        </tr>
+    </table>
+
+    <!-- Hidden form for editing student details -->
+    <form id="editForm" style="display: none;">
+        <h3>Edit Student Details</h3>
+        <label for="editName">Name:</label>
+        <input type="text" id="editName" required><br><br>
+
+        <label for="editAge">Age:</label>
+        <input type="number" id="editAge" required><br><br>
+
+        <label for="editGrade">Grade:</label>
+        <input type="text" id="editGrade" required><br><br>
+
+        <button type="button" onclick="updateStudent()">Update</button>
+        <button type="button" onclick="cancelEdit()">Cancel</button>
+    </form>
+
+    </script>
+
+    <!-- ------------- Chap 58-67 "DOM"  --------------------> 
+
+    <!-- 1. Consider you have following code snippet: --> 
+    <div>
+        <div id="form-content" class="content">
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" />
+            
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" />
+            
+            <label for="email">Email</label>
+            <input type="text" id="email" />
+        </div>
+
+        <div id="main-content" class="content">
+            <p class="render">First Name: Alex</p>
+            <p class="render" id="lastName">Last Name: Bank</p>
+            <p class="render">Email: alexbank@example.com</p>
+            <p class="render">Country: Pakistan</p>
+            <p class="render">Contact: +92 300 1234567</p>
+        </div>
+    </div>
+
+
+
+<script>
+    // QUESTION 1
+
+    // i. Get element of id "main-content" and assign it to a variable
+    var mainContent = document.getElementById("main-content");
+    console.log("main-content element:", mainContent);
+
+    // ii. Display all child elements of "main-content"
+    console.log("Children of 'main-content':", mainContent.children);
+
+    // iii. Get all elements of class "render" and display their innerHTML in the console
+    var renderElements = document.getElementsByClassName("render");
+    for (var i = 0; i < renderElements.length; i++) {
+        console.log("Content of render element:", renderElements[i].innerHTML);
+    }
+
+    // iv. Fill input value for the element with id "first-name" using JavaScript
+    document.getElementById("first-name").value = "Alex";
+
+    // v. Repeat part iv for ids "last-name" and "email"
+    document.getElementById("last-name").value = "Bank";
+    document.getElementById("email").value = "alexbank@example.com";
+
+
+    // QUESTION 2
+
+    // i. Get node type of element with id "form-content"
+    var formContent = document.getElementById("form-content");
+    console.log("Node type of 'form-content':", formContent.nodeType);
+
+    // ii. Show node type of element with id "lastName" and its child node
+    var lastNameElement = document.getElementById("lastName");
+    console.log("Node type of 'lastName':", lastNameElement.nodeType);
+    console.log("Node type of child of 'lastName':", lastNameElement.firstChild.nodeType);
+
+    // iii. Update child node of element with id "lastName"
+    lastNameElement.firstChild.nodeValue = "Last Name: Updated Bank";
+    console.log("Updated 'lastName' content:", lastNameElement.innerHTML);
+
+    // iv. Get first and last child of id "main-content"
+    console.log("First child of 'main-content':", mainContent.firstChild);
+    console.log("Last child of 'main-content':", mainContent.lastChild);
+
+    // v. Get next and previous siblings of id "lastName"
+    console.log("Next sibling of 'lastName':", lastNameElement.nextElementSibling);
+    console.log("Previous sibling of 'lastName':", lastNameElement.previousElementSibling);
+
+    // vi. Get parent node and node type of element with id "email"
+    var emailElement = document.getElementById("email");
+    console.log("Parent node of 'email':", emailElement.parentNode);
+    console.log("Node type of 'email':", emailElement.nodeType);
+</script>
+
+</html>
